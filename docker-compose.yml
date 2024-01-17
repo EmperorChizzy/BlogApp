@@ -1,0 +1,29 @@
+version: "3"
+services:
+  app:
+    build: ./
+    container_name: EliteFashionBlog-app
+    ports:
+      - 8085:8085
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/Blog
+      SPRING_DATASOURCE_PASSWORD: Run2safex
+      SPRING_DATASOURCE_USERNAME: postgres
+    depends_on:
+      - db
+    networks:
+      - fashion-api
+  db:
+    image: postgres:latest
+    container_name: postgresDB2
+    ports:
+      - 5433:5433
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Run2safex
+      POSTGRES_DB: Blog
+    networks:
+      - fashion-api
+networks:
+  fashion-api:
+    driver: bridge
